@@ -187,12 +187,3 @@ void stepServoJari (int x) {
           delay(1000);
      }
 }
-
-
-
-
-
-
-
-
-
