@@ -20,7 +20,6 @@ void setup() {
 
 void loop() {
   // Membaca data dari sensor suhu (analog) dan sensor inframerah (digital)
-  temperatureValue = analogRead(temperaturePin);
   obstacleDetected = digitalRead(obstaclePin);
   delay(100);
 }
