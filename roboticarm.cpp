@@ -1,104 +1,111 @@
-/*Robot arm control with Arduino
-   https://srituhobby.com
-*/
-//rasyid ganteng
-#include <Wire.h>
-#include <Adafruit_PWMServoDriver.h>
+#include <Servo.h>
 
-Adafruit_PWMServoDriver srituhobby = Adafruit_PWMServoDriver();
+Servo servo1;  // Buat objek Servo untuk servo pertama
+Servo servo2;  // Buat objek Servo untuk servo kedua
+Servo servo3;  // Buat objek Servo untuk servo ketiga
 
-#define servo1 10
-#define servo2 11
-#define servo3 12
-#define servo4 13
-
+int pos1 = 0;    // Posisi awal servo base
+int pos2 = 0;    // Posisi awal servo lengan
+int pos3 = 90;    // Posisi awal servo siku
+//int pos4 = 0;    // Posisi awal servo jari
+int increment = 1; // Besaran perubahan sudut pada setiap iterasi
+int delayTime = 15; // Waktu penundaan (kecepatan) dalam milidetik
+int jeda = 3000; // Waktu jeda 3 detik (dalam milidetik)
 
 void setup() {
-  Serial.begin(9600);
-  srituhobby.begin();
-  srituhobby.setPWMFreq(60);
-  srituhobby.setPWM(servo1, 0, 330);
-  srituhobby.setPWM(servo2, 0, 150);
-  srituhobby.setPWM(servo3, 0, 300);
-  srituhobby.setPWM(servo4, 0, 410);
-  delay(3000);
+  servo1.attach(9);  // Attach servo base ke pin 9
+  servo2.attach(10); // Attach servo lengan ke pin 10
+  servo3.attach(11); // Attach servo sikuk ke pin 11
+  //servo4.attach(12);// Attach servo jari ke pin 12
 }
 
 void loop() {
-
-  for (int S1value = 330; S1value >= 250; S1value--) {
-    srituhobby.setPWM(servo1, 0, S1value);
-    delay(10);
+  // Bergerak dari sudut 0 hingga 180 dengan increment 1 pada servo 1
+  for (pos1 = 0; pos1 <= 180; pos1 += increment) {
+    servo1.write(pos1);  // Set posisi servo 1
+    delay(delayTime);    // Tunggu sebentar
   }
 
-  for (int S2value = 150; S2value <= 380; S2value++) {
-    srituhobby.setPWM(servo2, 0, S2value);
-    delay(10);
+  // Tunggu selama 3 detik
+    delay(jeda);
+
+    // Bergerak dari sudut 0 hingga 180 dengan increment 1 pada servo 2
+  for (pos2 = 0; pos2 <= 90; pos2 += increment) {
+    servo2.write(pos2);  // Set posisi servo 2
+    delay(delayTime);    // Tunggu sebentar
   }
 
-  for (int S3value = 300; S3value <= 380; S3value++) {
-    srituhobby.setPWM(servo3, 0, S3value);
-    delay(10);
+  // Tunggu selama 3 detik
+  delay(jeda);
+
+    // Bergerak dari sudut 90 hingga 0 dengan increment -1 pada servo 3
+  for (pos3 = 90; pos3 >= 0; pos3 -= increment) {
+    servo3.write(pos3); //Set posisi servo 3
+    delay(delayTime); // Tunggu sebentar
+  }
+  
+  // Tunggu selama 3 detik
+  delay(jeda);
+  
+    // Bergerak dari sudut 0 hingga 90 dengan increment 1 pada servo 3
+  for (pos3 = 0; pos3 <= 90; pos3 += increment) {
+    servo3.write(pos3); //Set posisi servo 3
+    delay(delayTime); // Tunggu sebentar
+  }
+  
+  // Tunggu selama 3 detik
+  delay(jeda);
+
+  // Bergerak dari sudut 180 hingga 0 dengan increment -1 pada servo 2
+  for (pos2 = 90; pos2 >= 0; pos2 -= increment) {
+    servo2.write(pos2);  // Set posisi servo 2
+    delay(delayTime);    // Tunggu sebentar
+  }
+  
+  // Tunggu selama 3 detik
+  delay(jeda);
+
+  // Bergerak dari sudut 180 hingga 0 dengan increment -1 pada servo 1
+  for (pos1 = 180; pos1 >= 0; pos1 -= increment) {
+    servo1.write(pos1);  // Set posisi servo 1
+    delay(delayTime);    // Tunggu sebentar
   }
 
-  for (int S4value = 410; S4value <= 510; S4value++) {
-    srituhobby.setPWM(servo4, 0, S4value);
-    delay(10);
-  }
-  ////////////////////////
-  delay(2000);
-  for (int S4value = 510; S4value > 410; S4value--) {
-    srituhobby.setPWM(servo4, 0, S4value);
-    delay(10);
+  // Tunggu selama 3 detik
+  delay(jeda);
+
+  // Bergerak dari sudut 0 hingga 180 dengan increment 1 pada servo 2
+  for (pos2 = 0; pos2 <= 90; pos2 += increment) {
+    servo2.write(pos2);  // Set posisi servo 2
+    delay(delayTime);    // Tunggu sebentar
   }
 
-  for (int S3value = 380; S3value > 300; S3value--) {
-    srituhobby.setPWM(servo3, 0, S3value);
-    delay(10);
-  }
+  // Tunggu selama 3 detik
+  delay(jeda);
 
-  for (int S2value = 380; S2value > 150; S2value--) {
-    srituhobby.setPWM(servo2, 0, S2value);
-    delay(10);
+      // Bergerak dari sudut 0 hingga 45 dengan increment 1 pada servo 3
+  for (pos3 = 90; pos3 >= 0; pos3 -= increment) {
+    servo3.write(pos3); //Set posisi servo 3
+    delay(delayTime); // Tunggu sebentar
   }
+  
+  // Tunggu selama 3 detik
+  delay(jeda);
+  
+    // Bergerak dari sudut 45 hingga 0 dengan increment -1 pada servo 3
+  for (pos3 = 0; pos3 <= 90; pos3 += increment) {
+    servo3.write(pos3); //Set posisi servo 3
+    delay(delayTime); // Tunggu sebentar
+  }
+  
+  // Tunggu selama 3 detik
+  delay(jeda);
 
-  for (int S1value = 250; S1value < 450; S1value++) {
-    srituhobby.setPWM(servo1, 0, S1value);
-    delay(10);
+  // Bergerak dari sudut 180 hingga 0 dengan increment -1 pada servo 2
+  for (pos2 = 90; pos2 >= 0; pos2 -= increment) {
+    servo2.write(pos2);  // Set posisi servo 2
+    delay(delayTime);    // Tunggu sebentar
   }
-  //////////////////////
-  for (int S2value = 150; S2value <= 380; S2value++) {
-    srituhobby.setPWM(servo2, 0, S2value);
-    delay(10);
-  }
-
-  for (int S3value = 300; S3value <= 380; S3value++) {
-    srituhobby.setPWM(servo3, 0, S3value);
-    delay(10);
-  }
-
-  for (int S4value = 410; S4value <= 510; S4value++) {
-    srituhobby.setPWM(servo4, 0, S4value);
-    delay(10);
-  }
-
-  for (int S4value = 510; S4value > 410; S4value--) {
-    srituhobby.setPWM(servo4, 0, S4value);
-    delay(10);
-  }
-  ///////////////////
-  for (int S3value = 380; S3value > 300; S3value--) {
-    srituhobby.setPWM(servo3, 0, S3value);
-    delay(10);
-  }
-
-  for (int S2value = 380; S2value > 150; S2value--) {
-    srituhobby.setPWM(servo2, 0, S2value);
-    delay(10);
-  }
-
-  for (int S1value = 450; S1value > 330; S1value--) {
-    srituhobby.setPWM(servo1, 0, S1value);
-    delay(10);
-  }
+  delay(jeda);
 }
+
