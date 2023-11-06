@@ -1,34 +1,38 @@
 #include <Wire.h>
 
 //DEKLARASI I2C
-int alamatSlave = 10;
-int dataSlave = 0;
+int slaveAddress = 4;  // Alamat slave I2C
 
-//DEKLARASI OBSTACLE
-const int pinIR = 2;
+//DEKLARASI PIN
+int obstaclePin = 2;     // Pin sensor inframerah terhubung ke pin 2
+int relayPin = 7;        // Pin relay terhubung ke pin 7
+bool obstacleDetected = false;
+int temperatureValue = 0;
 
 void setup() {
-  Serial.begin(9600);
-  Wire.begin(alamatSlave);
-
-  pinMode(pinIR, INPUT);
-  Serial.println("Deteksi Sensor IR");
-  delay(3000);
+  Wire.begin(SLAVE_ADDRESS);
+  Wire.onReceive(receiveData);
+  Wire.onRequest(sendData);
+  pinMode(obstaclePin, INPUT);
+  pinMode(relayPin, OUTPUT);
+  digitalWrite(relayPin, LOW);  // Relay mati saat awalnya
 }
 
 void loop() {
-
-
+  // Membaca data dari sensor suhu (analog) dan sensor inframerah (digital)
+  temperatureValue = analogRead(temperaturePin);
+  obstacleDetected = digitalRead(obstaclePin);
+  delay(100);
 }
 
-void sensorObstacle () {
-    int sensorState = digitalRead(pinIR);
-    if (sensorState == LOW) {
-        Serial.println("Tedeteksi");
-    } else {
-        Serial.println("Tidak terdeteksi");
-    }
-    delay(500);
+void receiveData(int byteCount) {
+  while (Wire.available()) {
+    // Menerima data dari master, jika diperlukan
+  }
 }
 
-//DIKSUUUUUU
+void sendData() {
+  // Mengirim data dari kedua sensor dan status relay ke master
+  Wire.write(obstacleDetected);
+  Wire.write(digitalRead(relayPin));
+}

@@ -1,4 +1,9 @@
 #include <Servo.h>
+#include <Wire.h>
+
+//DEKLARASI I2C
+int alamatSlave = 4;
+int dataMaster = 0;
 
 //DEKLARASI PIN
 
@@ -7,11 +12,18 @@ int trigPin = 2;
 int echoPin = 3;
 
 //SERVO
-int servoRadar_attach = 9;
-int servoLengan_attach = 10;
-int servoSiku_attach = 11;
-int servoPergelangan_attach = 12;
-int servoJari_attach = 13;
+// int servoRadar_attach = 9;
+// int servoLengan_attach = 10;
+// int servoSiku_attach = 11;
+// int servoPergelangan_attach = 12;
+// int servoJari_attach = 13;
+
+//RELAY
+int relay = 9;
+
+//OBSTACLE
+int obstacle = 10;
+int obstacle_state = HIGH;
 
 //TCS3200
 int tcs_s0 = 4;
@@ -61,18 +73,28 @@ class TCS3200 {
 
 //MAIN
 void setup (){
-
+     
      Serial.begin(9600);
+
+     //KOMUNIKASI I2C
+     Wire.begin();
+
      //SERVO
-     servoRadar.attach(servoRadar_attach);
-     servoLengan.attach(servoLengan_attach);
-     servoSiku.attach(servoSiku_attach);
-     servoPergelangan.attach(servoPergelangan_attach);
-     servoJari.attach(servoJari_attach);
+     // servoRadar.attach(servoRadar_attach);
+     // servoLengan.attach(servoLengan_attach);
+     // servoSiku.attach(servoSiku_attach);
+     // servoPergelangan.attach(servoPergelangan_attach);
+     // servoJari.attach(servoJari_attach);
 
      //ULTRASONIC
      pinMode(trigPin, OUTPUT);
      pinMode(echoPin, INPUT);
+
+     //RELAY
+     pinMode(relay, OUTPUT);
+
+     //OBSTACLE
+     pinMode(obstacle, INPUT);
 
      //TCS3200
      pinMode(tcs_s0,OUTPUT);
@@ -80,14 +102,14 @@ void setup (){
      pinMode(tcs_s2,OUTPUT);
      pinMode(tcs_s3,OUTPUT);
      pinMode(tcs_out,INPUT);
-
      digitalWrite(tcs_s0,HIGH);
      digitalWrite(tcs_s1,HIGH);
      
 }
 
 void loop() {
-     //SERVO OBJECT DETECTOR
+
+     //SERVO OBJECT DETECTOR UNTUK MENDETEKSI BENDA 
      sudutAwal = 00;
      for (int a = sudutAwal; a <= 180; a++) {
          printJarak();
@@ -98,13 +120,13 @@ void loop() {
          printJarak();
          stepServoRadar(a);
      }   
-
+     
+     //SERVO ARM MEMBAWA BENDA UNTUK DILETAKKAN DI CONVEYOR
      stepServoJari(0);
      stepServoLengan(0);
      stepServoPergelangan(0);
      stepServoSiku(0);
-     
-     //SERVO ARM
+
      //LENGAN
      stepServoLengan(90); //0-180
 
@@ -117,9 +139,22 @@ void loop() {
      //JARI
      stepServoJari(0);
       
- 
 
-     //TCS3200
+     //KOMUNIKASI I2C
+
+     //CONVEYOR BERJALAN
+     digitalWrite(relay, HIGH);
+
+     //SENSOR OBJEK MENDETEKSI BENDA
+     while (obstacle_state == HIGH) {
+          obstacle_state = digitalRead(obstacle);
+          if (obstacle_state == LOW) {
+               //RELAY MATI
+               digitalWrite(relay, LOW);
+          }
+     }
+
+     //TCS3200 MENDETEKSI WARNA PADA BENDA
      TCS3200 sensor(tcs_s0, tcs_s1, tcs_s2, tcs_s3, tcs_out);
 
      int red = sensor.readColor(LOW, LOW);
@@ -137,6 +172,7 @@ void loop() {
      Serial.print('\n');
 
      delay(1000);
+
 }
 
 //FUNGSI
