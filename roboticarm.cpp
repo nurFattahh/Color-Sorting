@@ -1,5 +1,7 @@
 #include <Servo.h>
 
+//bacot lu adit s anjay mabar
+
 Servo servo1;  // Buat objek Servo untuk servo pertama
 Servo servo2;  // Buat objek Servo untuk servo kedua
 Servo servo3;  // Buat objek Servo untuk servo ketiga
