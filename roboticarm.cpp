@@ -1,7 +1,7 @@
 /*Robot arm control with Arduino
    https://srituhobby.com
 */
-
+//rasyid ganteng
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
