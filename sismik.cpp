@@ -149,7 +149,7 @@ void loop() {
      while (obstacle_state == HIGH) {
           obstacle_state = digitalRead(obstacle);
           if (obstacle_state == LOW) {
-               //RELAY MATI
+               //MEMATIKAN RELAY
                digitalWrite(relay, LOW);
           }
      }
