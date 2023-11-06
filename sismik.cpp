@@ -141,7 +141,7 @@ void loop() {
       
 
      //KOMUNIKASI I2C
-
+     
      //CONVEYOR BERJALAN
      digitalWrite(relay, HIGH);
 
@@ -153,6 +153,7 @@ void loop() {
                digitalWrite(relay, LOW);
           }
      }
+     delay(1500);
 
      //TCS3200 MENDETEKSI WARNA PADA BENDA
      TCS3200 sensor(tcs_s0, tcs_s1, tcs_s2, tcs_s3, tcs_out);
@@ -171,7 +172,36 @@ void loop() {
 
      Serial.print('\n');
 
-     delay(1000);
+     delay(2000);
+
+     int warna;
+     if(red > green && red > blue) {
+          warna = 0; // 0 = MERAH
+          Serial.print(warna);
+     } else if (green > red && green > blue){
+          warna = 1; // 1 = HIJAU
+          Serial.print(warna);
+     } else if (blue > red && blue >> green) {
+          warna = 2; // 2 = BIRU
+          Serial.print(warna);
+     }
+
+     switch (warna) {
+          case 0:
+          //ROBOTIC ARM KE PENAMPUNGAN MERAH
+
+          break;
+     
+          case 1:
+          //ROBOTIC ARM KE PENAMPUNGAN HIJAU
+
+          break;
+
+          case 2:
+          //ROBOTIC ARM KE PENAMPUNGAN BIRU
+
+          break;
+     }
 
 }
 
