@@ -6,7 +6,7 @@ Servo servo3;  // Buat objek Servo untuk servo ketiga
 
 int pos1 = 0;    // Posisi awal servo base
 int pos2 = 0;    // Posisi awal servo lengan
-int pos3 = 90;    // Posisi awal servo siku
+int pos3 = 150;    // Posisi awal servo siku
 //int pos4 = 0;    // Posisi awal servo jari
 int increment = 1; // Besaran perubahan sudut pada setiap iterasi
 int delayTime = 15; // Waktu penundaan (kecepatan) dalam milidetik
