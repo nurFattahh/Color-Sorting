@@ -104,86 +104,96 @@ void setup (){
      pinMode(tcs_out,INPUT);
      digitalWrite(tcs_s0,HIGH);
      digitalWrite(tcs_s1,HIGH);
+     digitalWrite(relay, LOW);
      
 }
 
 void loop() {
 
-     //SERVO OBJECT DETECTOR UNTUK MENDETEKSI BENDA 
-     sudutAwal = 00;
-     for (int a = sudutAwal; a <= 180; a++) {
-         printJarak();
-         stepServoRadar(a);
-     }
+     // //SERVO OBJECT DETECTOR UNTUK MENDETEKSI BENDA 
+     // sudutAwal = 00;
+     // for (int a = sudutAwal; a <= 180; a++) {
+     //     printJarak();
+     //     stepServoRadar(a);
+     // }
        
-     for (int a = 180; a >= sudutAwal; a--){
-         printJarak();
-         stepServoRadar(a);
-     }   
+     // for (int a = 180; a >= sudutAwal; a--){
+     //     printJarak();
+     //     stepServoRadar(a);
+     // }   
      
-     //SERVO ARM MEMBAWA BENDA UNTUK DILETAKKAN DI CONVEYOR
-     stepServoJari(0);
-     stepServoLengan(0);
-     stepServoPergelangan(0);
-     stepServoSiku(0);
+     // //SERVO ARM MEMBAWA BENDA UNTUK DILETAKKAN DI CONVEYOR
+     // stepServoJari(0);
+     // stepServoLengan(0);
+     // stepServoPergelangan(0);
+     // stepServoSiku(0);
 
-     //LENGAN
-     stepServoLengan(90); //0-180
+     // //LENGAN
+     // stepServoLengan(90); //0-180
 
-     //SIKU
-     stepServoSiku(0);
+     // //SIKU
+     // stepServoSiku(0);
 
-     //PERGELANGAN
-     stepServoPergelangan(0);
+     // //PERGELANGAN
+     // stepServoPergelangan(0);
 
-     //JARI
-     stepServoJari(0);
+     // //JARI
+     // stepServoJari(0);
       
 
      //KOMUNIKASI I2C
-     
+
      //CONVEYOR BERJALAN
-     digitalWrite(relay, HIGH);
+     digitalWrite(relay, LOW);
 
      //SENSOR OBJEK MENDETEKSI BENDA
      while (obstacle_state == HIGH) {
           obstacle_state = digitalRead(obstacle);
           if (obstacle_state == LOW) {
+               Serial.println("Terdeteksi");
                //MEMATIKAN RELAY
-               digitalWrite(relay, LOW);
+               digitalWrite(relay, HIGH);
           }
      }
-     delay(1500);
+     delay(2000);
 
      //TCS3200 MENDETEKSI WARNA PADA BENDA
      TCS3200 sensor(tcs_s0, tcs_s1, tcs_s2, tcs_s3, tcs_out);
+     int red = 0;
+     int green = 0;
+     int blue = 0;
+     
+     while (red == 0 || green == 0 || blue == 0) {
+          red = sensor.readColor(LOW, LOW);
+          Serial.print("Red value: ");
+          sensor.printWarna(red);
 
-     int red = sensor.readColor(LOW, LOW);
-     Serial.print("Red value: ");
-     sensor.printWarna(red);
+          blue = sensor.readColor(LOW, HIGH);
+          Serial.print("Blue value: ");
+          sensor.printWarna(blue);
 
-     int blue = sensor.readColor(LOW, HIGH);
-     Serial.print("Blue value: ");
-     sensor.printWarna(blue);
+          green = sensor.readColor(HIGH, HIGH);
+          Serial.print("Green value: ");
+          sensor.printWarna(green);
 
-     int green = sensor.readColor(HIGH, HIGH);
-     Serial.print("Green value: ");
-     sensor.printWarna(green);
+          Serial.print('\n');
+          delay(1000);
+     }
 
-     Serial.print('\n');
-
-     delay(2000);
-
+     //SORTIR WARNA
      int warna;
-     if(red > green && red > blue) {
+     if(red < green && red < blue) {
           warna = 0; // 0 = MERAH
-          Serial.print(warna);
-     } else if (green > red && green > blue){
-          warna = 1; // 1 = HIJAU
-          Serial.print(warna);
-     } else if (blue > red && blue >> green) {
-          warna = 2; // 2 = BIRU
-          Serial.print(warna);
+          Serial.print("Hasil warna: ");
+          Serial.println("Merah");
+     } else if (green < red && green < blue){
+          warna = 2; // 2 = HIJAU
+          Serial.print("Hasil warna: ");
+          Serial.println("Hijau");
+     } else if (blue < red && blue < green) {
+          warna = 1; // 1 = BIRU
+          Serial.print("Hasil warna: ");
+          Serial.println("Biru");
      }
 
      switch (warna) {
@@ -193,12 +203,12 @@ void loop() {
           break;
      
           case 1:
-          //ROBOTIC ARM KE PENAMPUNGAN HIJAU
+          //ROBOTIC ARM KE PENAMPUNGAN BIRU
 
           break;
 
           case 2:
-          //ROBOTIC ARM KE PENAMPUNGAN BIRU
+          //ROBOTIC ARM KE PENAMPUNGAN HIJAU
 
           break;
      }
