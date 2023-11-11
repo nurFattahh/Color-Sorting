@@ -22,14 +22,14 @@ void loop() {
     Serial.print(servoNum + 1);
     Serial.println(" to minimum position");
     pwm.setPWM(servoNum, 0, SERVO_MIN);
-    delay(1000);  // Wait for the servo to reach the minimum position
+    delay(3000);  // Wait for the servo to reach the minimum position
 
     // Move each servo to the maximum position
     Serial.print("Moving Servo ");
     Serial.print(servoNum + 1);
     Serial.println(" to maximum position");
     pwm.setPWM(servoNum, 0, SERVO_MAX);
-    delay(1000);  // Wait for the servo to reach the maximum position
+    delay(3000);  // Wait for the servo to reach the maximum position
 
     // Return each servo to the center position
     Serial.print("Returning Servo ");
@@ -37,6 +37,6 @@ void loop() {
     Serial.println(" to center position");
     int centerPosition = (SERVO_MIN + SERVO_MAX) / 2;
     pwm.setPWM(servoNum, 0, centerPosition);
-    delay(1000);  // Wait for the servo to return to the center position
+    delay(3000);  // Wait for the servo to return to the center position
   }
 }
