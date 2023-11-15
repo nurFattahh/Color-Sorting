@@ -150,7 +150,10 @@ void loop() {
                Serial.println("Terdeteksi");
                //MEMATIKAN RELAY
                digitalWrite(relay, HIGH);
-               moveServoSlowly(0, 0, 180, 5, 400);  // Gerakkan servo dari posisi 0 ke 180 derajat dengan langkah 5 derajat
+               moveServoSlowly(0, 0, 0, 5, 400);
+               moveServoSlowly(1, 0, 30, 5, 400);
+               moveServoSlowlymin(2, 180, 120, 5, 400);
+               moveServoSlowly(0, 0, 180, 5, 400);
                moveServoSlowlymin(0, 180, 0, 5, 400);
           }
      }
