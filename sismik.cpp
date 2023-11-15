@@ -72,41 +72,7 @@ class TCS3200 {
 };
 
 //MAIN
-void setup (){
-     
-     Serial.begin(9600);
-
-     //KOMUNIKASI I2C
-     Wire.begin();
-
-     //SERVO
-     // servoRadar.attach(servoRadar_attach);
-     // servoLengan.attach(servoLengan_attach);
-     // servoSiku.attach(servoSiku_attach);
-     // servoPergelangan.attach(servoPergelangan_attach);
-     // servoJari.attach(servoJari_attach);
-
-     //ULTRASONIC
-     pinMode(trigPin, OUTPUT);
-     pinMode(echoPin, INPUT);
-
-     //RELAY
-     pinMode(relay, OUTPUT);
-
-     //OBSTACLE
-     pinMode(obstacle, INPUT);
-
-     //TCS3200
-     pinMode(tcs_s0,OUTPUT);
-     pinMode(tcs_s1,OUTPUT);
-     pinMode(tcs_s2,OUTPUT);
-     pinMode(tcs_s3,OUTPUT);
-     pinMode(tcs_out,INPUT);
-     digitalWrite(tcs_s0,HIGH);
-     digitalWrite(tcs_s1,HIGH);
-     digitalWrite(relay, LOW);
-     
-}
+ 
 
 void loop() {
 
