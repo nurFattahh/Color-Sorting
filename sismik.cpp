@@ -82,10 +82,26 @@ class TCS3200 {
 //MAIN
 void setup() {
   Serial.begin(9600);
-  Serial.println("Adafruit PWM Servo Driver Test");
+  Serial.println("Mulai Program");
 
   pwm.begin();
   pwm.setPWMFreq(60);  // Set frekuensi PWM ke 60 Hz (sesuaikan dengan servo)
+
+  //RELAY
+     pinMode(relay, OUTPUT);
+
+     //OBSTACLE
+     pinMode(obstacle, INPUT);
+
+     //TCS3200
+     pinMode(tcs_s0,OUTPUT);
+     pinMode(tcs_s1,OUTPUT);
+     pinMode(tcs_s2,OUTPUT);
+     pinMode(tcs_s3,OUTPUT);
+     pinMode(tcs_out,INPUT);
+     digitalWrite(tcs_s0,HIGH);
+     digitalWrite(tcs_s1,HIGH);
+     digitalWrite(relay, LOW);
 }
 
 void moveServoSlowly(uint8_t servoNum, uint16_t fromPos, uint16_t toPos, uint8_t stepSize, unsigned long time) {
@@ -146,6 +162,7 @@ void loop() {
      //SENSOR OBJEK MENDETEKSI BENDA
      while (obstacle_state == HIGH) {
           obstacle_state = digitalRead(obstacle);
+          Serial.println("Tidak terdeteksi");
           if (obstacle_state == LOW) {
                Serial.println("Terdeteksi");
                //MEMATIKAN RELAY
@@ -226,7 +243,8 @@ void loop() {
                moveServoSlowlymin(0, 90, 40, 5, 400); // TUJUAN PENAMPUNG HIJAU
                moveServoSlowly(3, 30, 115, 10, 250);
           } break;
-     }
+     } 
+     delay(1000);
 
 }
 
