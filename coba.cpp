@@ -18,9 +18,13 @@ void setup() {
 }
 
 void loop() {
-  
-  moveServoSlowly(0, 0, 180, 5);  // Gerakkan servo dari posisi 0 ke 180 derajat dengan langkah 5 derajat
-  moveServoSlowlymin(0, 180, 0, 5);
+  // //maks servo 1
+  // moveServoSlowly(0, 0, 180, 5);  // Gerakkan servo dari posisi 0 ke 180 derajat dengan langkah 5 derajat
+  // //min servo 1
+  // moveServoSlowlymin(0, 180, 0, 5);
+  //maks servo 2
+  moveServoSlowly(0,0,90,5);
+  //min servo 2
 }
 
 void moveServoSlowly(uint8_t servoNum, uint16_t fromPos, uint16_t toPos, uint8_t stepSize) {

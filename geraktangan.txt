@@ -1,0 +1,7 @@
+1. MERAH
+    servo 1 = minimum
+    
+
+2. HIJAU
+
+3. BIRU
