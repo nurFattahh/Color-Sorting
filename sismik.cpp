@@ -150,11 +150,6 @@ void loop() {
                Serial.println("Terdeteksi");
                //MEMATIKAN RELAY
                digitalWrite(relay, HIGH);
-               moveServoSlowly(0, 0, 0, 5, 400);
-               moveServoSlowly(1, 0, 30, 5, 400);
-               moveServoSlowlymin(2, 180, 120, 5, 400);
-               moveServoSlowly(0, 0, 180, 5, 400);
-               moveServoSlowlymin(0, 180, 0, 5, 400);
           }
      }
      delay(2000);
@@ -199,20 +194,38 @@ void loop() {
      }
 
      switch (warna) {
-          case 0:
-          //ROBOTIC ARM KE PENAMPUNGAN MERAH
+          case 0: {
+               //ROBOTIC ARM KE PENAMPUNGAN MERAH
+               moveServoSlowly(0, 0, 90, 5, 400);
+               moveServoSlowly(3, 0, 115, 10, 250);
+               moveServoSlowly(2, 0, 105, 5, 400);  
+               moveServoSlowlymin(3, 115, 30, 10, 250);
+               moveServoSlowlymin(2, 105, 60, 5, 400);
+               moveServoSlowlymin(0, 90, 20, 5, 400); // TUJUAN PENAMPUNG MERAH
+               moveServoSlowly(3, 30, 115, 10, 250);
+          } break;
+          
+          case 1: {
+               //ROBOTIC ARM KE PENAMPUNGAN BIRU   
+               moveServoSlowly(0, 0, 90, 5, 400);
+               moveServoSlowly(3, 0, 115, 10, 250);
+               moveServoSlowly(2, 0, 105, 5, 400);  
+               moveServoSlowlymin(3, 115, 30, 10, 250);
+               moveServoSlowlymin(2, 105, 60, 5, 400);
+               moveServoSlowlymin(0, 90, 0, 5, 400); // TUJUAN PENAMPUNG BIRU
+               moveServoSlowly(3, 30, 115, 10, 250);
+          } break;
 
-          break;
-     
-          case 1:
-          //ROBOTIC ARM KE PENAMPUNGAN BIRU
-
-          break;
-
-          case 2:
-          //ROBOTIC ARM KE PENAMPUNGAN HIJAU
-
-          break;
+          case 2: {
+               //ROBOTIC ARM KE PENAMPUNGAN HIJAU
+               moveServoSlowly(0, 0, 90, 5, 400);
+               moveServoSlowly(3, 0, 115, 10, 250);
+               moveServoSlowly(2, 0, 105, 5, 400);  
+               moveServoSlowlymin(3, 115, 30, 10, 250);
+               moveServoSlowlymin(2, 105, 60, 5, 400);
+               moveServoSlowlymin(0, 90, 40, 5, 400); // TUJUAN PENAMPUNG HIJAU
+               moveServoSlowly(3, 30, 115, 10, 250);
+          } break;
      }
 
 }

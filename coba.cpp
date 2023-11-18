@@ -23,11 +23,17 @@ void loop() {
   // //min servo 1
   // moveServoSlowlymin(0, 180, 0, 5);
   //maks servo 2
-  moveServoSlowly(0,0,90,5);
+  // moveServoSlowly(0,0,90,5);
   //min servo 2
-  
-  moveServoSlowly(0, 0, 180, 5, 400);  // Gerakkan servo dari posisi 0 ke 180 derajat dengan langkah 5 derajat
-  moveServoSlowlymin(0, 180, 0, 5, 400);
+
+  //moveServoSlowly(0, 0, 90, 5, 400);
+  //moveServoSlowly(3, 0, 115, 10, 250);
+  //moveServoSlowly(2, 0, 105, 5, 400);  // Gerakkan servo dari posisi 0 ke 180 derajat dengan langkah 5 derajat
+  //moveServoSlowlymin(3, 115, 30, 10, 250);
+  //moveServoSlowlymin(2, 105, 60, 5, 400);
+  //moveServoSlowlymin(0, 90, 0, 5, 400);
+  //moveServoSlowly(3, 30, 115, 10, 250);
+  exit(0);
 }
 
 void moveServoSlowly(uint8_t servoNum, uint16_t fromPos, uint16_t toPos, uint8_t stepSize, unsigned long time) {
