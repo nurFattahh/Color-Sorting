@@ -166,7 +166,7 @@ void loop() {
           case 2: {
                //ROBOTIC ARM KE PENAMPUNGAN HIJAU
                ArmMotion(0, 90, 180, 10, 250);
-               ArmMotion(3, 0, 110, 10, 250);
+               ArmMotion(3, 0, 120, 10, 250);
                ArmMotion(2, 0, 110, 10, 250);  
                ArmMotionReverse(3, 150, 30, 10, 250);
                ArmMotionReverse(2, 120, 60, 10, 250);
