@@ -10,9 +10,6 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(SERVO_DRIVER_ADDRESS);
 
 //DEKLARASI PIN
 
-//SENSOR ULTRASONIC
-int trigPin = 2;
-int echoPin = 3;
 
 //RELAY
 int relay = 5;
@@ -87,18 +84,7 @@ void setup() {
 
 void loop() {
 
-     // //SERVO OBJECT DETECTOR UNTUK MENDETEKSI BENDA 
-     // sudutAwal = 00;
-     // for (int a = sudutAwal; a <= 180; a++) {
-     //     printJarak();
-     //     stepServoRadar(a);
-     // }
-       
-     // for (int a = 180; a >= sudutAwal; a--){
-     //     printJarak();
-     //     stepServoRadar(a);
-     // }   
-
+     
      //CONVEYOR BERJALAN
      digitalWrite(relay, LOW);
      obstacle_state = HIGH; //memberi nilai HIGH agar obstacle tidak mendeteksi benda
@@ -209,16 +195,3 @@ void ArmMotionReverse(uint8_t servoNum, uint16_t fromPos, uint16_t toPos, uint8_
     delay(time); 
   }
 }
-
-// void printJarak () {
-//      digitalWrite(trigPin, LOW);
-//      delayMicroseconds(2);
-//      digitalWrite(trigPin, HIGH);
-//      delayMicroseconds(10);
-//      digitalWrite(trigPin, LOW);
-//      waktu = pulseIn(echoPin, HIGH);
-//      jarak= waktu*0.034/2;
-//      Serial.println("Jarak: ");
-//      Serial.println(jarak);
-// }
-     
