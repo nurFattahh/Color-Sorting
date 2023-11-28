@@ -12,18 +12,18 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(SERVO_DRIVER_ADDRESS);
 
 
 //RELAY
-int relay = 5;
+int relay = 7;
 
 //OBSTACLE
-int obstacle = 2;
+int obstacle = 8;
 
 
 //TCS3200
-int tcs_s0 = 9;
-int tcs_s1 = 10;
-int tcs_s2 = 7;
-int tcs_s3 = 6;
-int tcs_out = 8;
+int tcs_s0 = 2;
+int tcs_s1 = 3;
+int tcs_s2 = 4;
+int tcs_s3 = 5;
+int tcs_out = 6;
 
 //DEKLARASI VARIABEL
 int obstacle_state = HIGH;
