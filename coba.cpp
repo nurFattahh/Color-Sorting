@@ -18,37 +18,32 @@ void setup() {
 }
 
 void loop() {
-  // //maks servo 1
-  // moveServoSlowly(0, 0, 180, 5);  // Gerakkan servo dari posisi 0 ke 180 derajat dengan langkah 5 derajat
-  // //min servo 1
-  // moveServoSlowlymin(0, 180, 0, 5);
-  //maks servo 2
-  // moveServoSlowly(0,0,90,5);
-  //min servo 2
+  //ROBOTIC ARM KE PENAMPUNGAN BIRU   
+               ArmMotion(0, 90, 180, 3, 100); // MENUJU CONVEYOR
+               //ArmMotion(3, 30, 130, 10, 400); // MEMBUKA CAPIT
+               ArmMotion(2, 60, 120, 5, 200); // MENDEKATI CONVEYOR
+               ArmMotionReverse(3, 130, 30, 10, 400); // MENUTUP CAPIT
+               ArmMotionReverse(2, 120, 60, 5, 200); // MENJAUHI CONVEYOT
+               ArmMotionReverse(0, 180, 10, 3, 100); // MENUJU PENAMPUNG MERAH
+               ArmMotion(3, 30, 130, 10, 400); //MEMBUKA CAPIT
+               exit(0);
 
-  //moveServoSlowly(0, 0, 90, 5, 400);
-  //moveServoSlowly(3, 0, 115, 10, 250);
-  //moveServoSlowly(2, 0, 105, 5, 400);  // Gerakkan servo dari posisi 0 ke 180 derajat dengan langkah 5 derajat
-  //moveServoSlowlymin(3, 115, 30, 10, 250);
-  //moveServoSlowlymin(2, 105, 60, 5, 400);
-  //moveServoSlowlymin(0, 90, 0, 5, 400);
-  //moveServoSlowly(3, 30, 115, 10, 250);
-  exit(0);
 }
 
-void moveServoSlowly(uint8_t servoNum, uint16_t fromPos, uint16_t toPos, uint8_t stepSize, unsigned long time) {
-  // Gerakkan servo dari posisi awal ke posisi akhir dengan langkah tertentu
+//FUNGSI
+
+//FUNGSI GERAK SERVO
+void ArmMotion(uint8_t servoNum, uint16_t fromPos, uint16_t toPos, uint8_t stepSize, unsigned long time) {
   for (uint16_t pos = fromPos; pos <= toPos; pos += stepSize) {
     pwm.setPWM(servoNum, 0, map(pos, 0, 180, SERVOMIN, SERVOMAX));
-    delay(time);  // Sesuaikan nilai delay sesuai kebutuhan untuk memperlambat gerakan
+    delay(time); 
   }
 }
 
-void moveServoSlowlymin(uint8_t servoNum, uint16_t fromPos, uint16_t toPos, uint8_t stepSize, unsigned long time) {
-  // Gerakkan servo dari posisi awal ke posisi akhir dengan langkah tertentu
+//FUNGSI GERAK SERVO REVERSE
+void ArmMotionReverse(uint8_t servoNum, uint16_t fromPos, uint16_t toPos, uint8_t stepSize, unsigned long time) {
   for (uint16_t pos = fromPos; pos >= toPos; pos -= stepSize) {
     pwm.setPWM(servoNum, 0, map(pos, 0, 180, SERVOMIN, SERVOMAX));
-    delay(time);  // Sesuaikan nilai delay sesuai kebutuhan untuk memperlambat gerakan
+    delay(time); 
   }
 }
-
