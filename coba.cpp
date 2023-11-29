@@ -19,13 +19,16 @@ void setup() {
 
 void loop() {
   //ROBOTIC ARM KE PENAMPUNGAN BIRU   
-               ArmMotion(0, 90, 180, 3, 100); // MENUJU CONVEYOR
-               //ArmMotion(3, 30, 130, 10, 400); // MEMBUKA CAPIT
-               ArmMotion(2, 60, 120, 5, 200); // MENDEKATI CONVEYOR
-               ArmMotionReverse(3, 130, 30, 10, 400); // MENUTUP CAPIT
-               ArmMotionReverse(2, 120, 60, 5, 200); // MENJAUHI CONVEYOT
-               ArmMotionReverse(0, 180, 10, 3, 100); // MENUJU PENAMPUNG MERAH
-               ArmMotion(3, 30, 130, 10, 400); //MEMBUKA CAPIT
+               ArmMotion(0, 90, 180, 3, 100);
+               ArmMotion(3, 0, 130, 5, 300);
+               ArmMotion(3, 130, 130, 5, 300);
+               ArmMotion(2, 0, 110, 3, 100);  
+               ArmMotionReverse(3, 130, 25, 5, 300);
+               ArmMotionReverse(3, 25, 25, 5, 300);
+               ArmMotionReverse(2, 120, 60, 3, 100);
+               ArmMotionReverse(0, 180, 45, 3, 100); // MENUJU PENAMPUNG BIRU
+               ArmMotion(3, 25, 130, 10, 300);
+               ArmMotion(3, 130, 130, 10, 300);
                exit(0);
 
 }
