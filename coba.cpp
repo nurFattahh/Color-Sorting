@@ -19,18 +19,13 @@ void setup() {
 
 void loop() {
   //ROBOTIC ARM KE PENAMPUNGAN BIRU   
-               ArmMotion(0, 90, 180, 3, 100);
-               ArmMotion(3, 0, 130, 5, 300);
-               ArmMotion(3, 130, 130, 5, 300);
-               ArmMotion(2, 0, 110, 3, 100);  
-               ArmMotionReverse(3, 130, 25, 5, 300);
-               ArmMotionReverse(3, 25, 25, 5, 300);
-               ArmMotionReverse(2, 120, 60, 3, 100);
-               ArmMotionReverse(0, 180, 45, 3, 100); // MENUJU PENAMPUNG BIRU
-               ArmMotion(3, 25, 130, 10, 300);
-               ArmMotion(3, 130, 130, 10, 300);
-               exit(0);
-
+               ArmMotion(0, 90, 180, 10, 400);
+               ArmMotion(3, 0, 120, 10, 400);
+               ArmMotion(2, 0, 110, 10, 400);  
+               ArmMotionReverse(3, 150, 30, 10, 400);
+               ArmMotionReverse(2, 120, 60, 10, 400);
+               ArmMotionReverse(0, 180, 60, 10, 400); // MENUJU PENAMPUNG BIRU
+               ArmMotion(3, 30, 110, 10, 400);
 }
 
 //FUNGSI

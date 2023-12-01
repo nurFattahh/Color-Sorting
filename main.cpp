@@ -1,4 +1,3 @@
-
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
@@ -143,35 +142,35 @@ void loop() {
      switch (warna) {
           case 0: {
                //ROBOTIC ARM KE PENAMPUNGAN MERAH
-               ArmMotion(0, 90, 180, 10, 400); // MENUJU CONVEYOR
-               ArmMotion(3, 0, 120, 10, 400); // MEMBUKA CAPIT
-               ArmMotion(2, 0, 110, 10, 400); // MENDEKATI CONVEYOR
-               ArmMotionReverse(3, 150, 30, 10, 400); // MENUTUP CAPIT
-               ArmMotionReverse(2, 120, 60, 10, 400); // MENJAUHI CONVEYOT
-               ArmMotionReverse(0, 180, 10, 10, 400); // MENUJU PENAMPUNG MERAH
-               ArmMotion(3, 30, 110, 10, 400); //MEMBUKA CAPIT
+               ArmMotion(0, 180, 180, 10, 400);
+               ArmMotion(3, 0, 120, 10, 400);
+               ArmMotion(2, 40, 120, 4, 50);  
+               ArmMotionReverse(3, 120, 30, 10, 400);
+               ArmMotionReverse(2, 120, 60, 4, 50);
+               ArmMotionReverse(0, 180, 60, 5, 100); // MENUJU PENAMPUNG BIRU
+               ArmMotion(3, 30, 100, 10, 400);
           } break;
           
           case 1: {
                //ROBOTIC ARM KE PENAMPUNGAN BIRU   
-               ArmMotion(0, 90, 180, 10, 400);
+               ArmMotion(0, 180, 180, 10, 400);
                ArmMotion(3, 0, 120, 10, 400);
-               ArmMotion(2, 0, 110, 10, 400);  
-               ArmMotionReverse(3, 150, 30, 10, 400);
-               ArmMotionReverse(2, 120, 60, 10, 400);
-               ArmMotionReverse(0, 180, 60, 10, 400); // MENUJU PENAMPUNG BIRU
-               ArmMotion(3, 30, 110, 10, 400);
+               ArmMotion(2, 40, 120, 4, 50);  
+               ArmMotionReverse(3, 120, 30, 10, 400);
+               ArmMotionReverse(2, 120, 60, 4, 50);
+               ArmMotionReverse(0, 180, 60, 5, 100); // MENUJU PENAMPUNG BIRU
+               ArmMotion(3, 30, 100, 10, 400);
           } break;
 
           case 2: {
                //ROBOTIC ARM KE PENAMPUNGAN HIJAU
-               ArmMotion(0, 90, 180, 10, 400);
+               ArmMotion(0, 180, 180, 10, 400);
                ArmMotion(3, 0, 120, 10, 400);
-               ArmMotion(2, 0, 110, 10, 400);  
-               ArmMotionReverse(3, 150, 30, 10, 400);
-               ArmMotionReverse(2, 120, 60, 10, 400);
-               ArmMotionReverse(0, 180, 90, 10, 400); // MENUJU PENAMPUNG HIJAU
-               ArmMotion(3, 30, 120, 10, 400);
+               ArmMotion(2, 40, 120, 4, 50);  
+               ArmMotionReverse(3, 120, 30, 10, 400);
+               ArmMotionReverse(2, 120, 60, 4, 50);
+               ArmMotionReverse(0, 180, 60, 5, 100); // MENUJU PENAMPUNG BIRU
+               ArmMotion(3, 30, 100, 10, 400);
           } break;
      } 
      delay(1000);
